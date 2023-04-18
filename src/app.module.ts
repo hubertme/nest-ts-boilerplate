@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import AppConfig from '../app_config';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        // Configure dotenv
+        ConfigModule.forRoot({
+            envFilePath: AppConfig.envFilePath,
+            isGlobal: true,
+        }),
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

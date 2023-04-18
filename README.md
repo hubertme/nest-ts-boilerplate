@@ -1,5 +1,5 @@
-# bayaraja-be-rpc-campaign
-BayarAja Campaign RPC
+# nest-ts-boilerplate
+Boilerplate for NestJS with Typescript and REST + gRPC
 
 
 # Commands

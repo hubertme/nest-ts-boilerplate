@@ -1,5 +1,5 @@
 {
-  "name": "bayaraja-be-rpc-campaign",
+  "name": "nest-ts-boilerplate",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -17,14 +17,20 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:gen": "npm run build && ts-node node_modules/.bin/typeorm migration:generate src/migrations/migration -d src/db_manager.ts -o",
+    "migration:run": "ts-node node_modules/.bin/typeorm migration:run -d src/db_manager.ts",
+    "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert -d src/db_manager.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.15"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
