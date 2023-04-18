@@ -23,13 +23,17 @@
     "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert -d src/db_manager.ts"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.14",
+    "@grpc/proto-loader": "^0.7.6",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/microservices": "^9.4.0",
     "@nestjs/platform-express": "^9.0.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "ts-proto": "^1.146.0",
     "typeorm": "^0.3.15"
   },
   "devDependencies": {
