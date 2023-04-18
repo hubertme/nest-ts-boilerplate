@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { HellorpcModule } from './hellorpc/hellorpc.module';
+import { ExrouteModule } from './exroute/exroute.module';
 import AppConfig from '../app_config';
 
 @Module({
@@ -13,6 +14,7 @@ import AppConfig from '../app_config';
             isGlobal: true,
         }),
         HellorpcModule,
+        ExrouteModule,
     ],
     controllers: [AppController],
     providers: [AppService],
