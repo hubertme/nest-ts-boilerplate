@@ -26,7 +26,7 @@ async function runGrpc() {
             protoPath: path.join(__dirname, `../hellorpc/rpc/rpc_hellorpc.proto`),
         },
     });
-    console.log('Visa gRPC running on port:', port);
+    console.log('gRPC running on port:', port);
     await app.listen();
 }
 
