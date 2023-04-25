@@ -80,7 +80,7 @@ describe('StringUtil', () => {
 
         it('should use the specified suffix', () => {
             const str = 'test';
-            expect(StringUtil.truncate(str, 2, '...')).toBe('te...');
+            expect(StringUtil.truncate(str, 2, '***')).toBe('te***');
         });
     });
 

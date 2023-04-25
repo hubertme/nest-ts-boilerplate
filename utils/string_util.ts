@@ -1,8 +1,18 @@
 export default class StringUtil {
+    /**
+     * Checks if a string is empty.
+     * @param str 
+     * @returns boolean
+     */
     static isBlank(str: string): boolean {
         return str == null || str.trim() === '';
     }
 
+    /**
+     * Checks if a string is not empty.
+     * @param str
+     * @returns boolean
+     */
     static isNotBlank(str: string): boolean {
         return !StringUtil.isBlank(str);
     }
