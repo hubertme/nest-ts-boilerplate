@@ -1,6 +1,7 @@
 import * as path from 'path';
 import DBManager from './src/db_manager';
 import RedisUtil from './utils/redis_util';
+import ElasticSearchUtil from './utils/elasticsearch_util';
 
 export default class AppConfig {
     static readonly ENVS: 'dev' | 'staging' | 'prod' = 'dev';
@@ -21,5 +22,6 @@ export default class AppConfig {
     private static async initDependencies() {
         await DBManager.initialize();
         RedisUtil.init();
+        ElasticSearchUtil.init();
     }
 }

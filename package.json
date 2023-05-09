@@ -23,6 +23,7 @@
     "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert -d src/db_manager.ts"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.7.0",
     "@grpc/grpc-js": "^1.8.14",
     "@grpc/proto-loader": "^0.7.6",
     "@nestjs/common": "^9.4.0",
