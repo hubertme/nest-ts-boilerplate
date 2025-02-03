@@ -5,7 +5,7 @@ import ElasticSearchUtil from './utils/elasticsearch_util';
 import GrafanaUtil from './utils/grafana_util';
 
 export default class AppConfig {
-    static readonly ENVS: 'dev' | 'staging' | 'prod' = 'dev';
+    static readonly ENVS: 'dev' | 'staging' | 'prod' = process.env.NODE_ENV as 'dev' | 'staging' | 'prod' || 'dev';
     static get isProduction(): boolean {
         return this.ENVS === 'prod';
     }
@@ -21,9 +21,9 @@ export default class AppConfig {
     }
 
     private static async initDependencies() {
-        RedisUtil.init();
-        ElasticSearchUtil.init();
-        GrafanaUtil.init();
+        // RedisUtil.init();
+        // ElasticSearchUtil.init();
+        // GrafanaUtil.init();
 
         await DBManager.initialize();
     }
