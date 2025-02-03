@@ -33,3 +33,9 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Self-prop files
+# envs/
+keys/
+# db_manager.ts
+migrations/
