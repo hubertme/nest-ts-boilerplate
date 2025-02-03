@@ -1,5 +1,4 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import NetworkingUtil from '../../utils/networking_util';
 import { HelloRequest, HelloRpcServiceClient } from '../hellorpc/rpc/rpc_hellorpc';
 import EnumRPCCodenames from '../../consts/enums/enum_rpc_codenames';
 import { ClientGrpc } from '@nestjs/microservices';

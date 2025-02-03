@@ -1,3 +1,4 @@
+import AppConfig from '../app_config';
 import {SuccessCodes, ErrorCodes} from './codes';
 
 class ResponseModel {
@@ -23,7 +24,7 @@ export default class ServerResponse {
     }
 
     static Error(errorCode: string, message: string, data: any = null): ResponseModel {
-        if (message == '') {
+        if (message === '') {
             message = 'Undefined error code...'
         }
 
@@ -57,7 +58,7 @@ export default class ServerResponse {
                 error: {
                     name: data.name,
                     message: data.message,
-                    stack: data.stack,
+                    stack: !AppConfig.isProduction ? data.stack : undefined,
                 }
             };
         }

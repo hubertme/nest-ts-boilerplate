@@ -18,6 +18,8 @@ export default class StringUtil {
     }
     
     static truncate(str: string, length: number, suffix: string = '...'): string {
+        if (!str) return str;
+        if (length < 0) length = 0;
         return str.length > length ? str.substring(0, length) + suffix : str;
     }
 
