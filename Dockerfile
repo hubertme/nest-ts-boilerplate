@@ -1,4 +1,4 @@
-FROM node:18-alpine As development
+FROM node:20-alpine As development
 
 # Create app directory
 WORKDIR /app
@@ -23,7 +23,7 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:18-alpine As build
+FROM node:20-alpine As build
 
 WORKDIR /app
 
@@ -55,7 +55,10 @@ USER node
 # PRODUCTION
 ###################
 
-FROM node:18-alpine As production
+FROM node:20-alpine As production
+
+# Install curl for healthcheck
+RUN apk add --no-cache curl
 
 RUN ls -alh
 
@@ -67,6 +70,13 @@ COPY --chown=node:node --from=build /app/dist ./dist
 
 COPY --chown=node:node --from=build /app/envs/ ./envs
 COPY --chown=node:node --from=build /app/keys/ ./keys
+
+# Add security scanning
+RUN npm audit
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
+  CMD curl -f http://localhost:${PORT}/health || exit 1
 
 # Start the server using the production build
 CMD [ "node", "dist/src/main" ]

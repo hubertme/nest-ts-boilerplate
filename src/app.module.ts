@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HellorpcModule } from './hellorpc/hellorpc.module';
 import { ExrouteModule } from './exroute/exroute.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { HealthModule } from './health/health.module';
 import AppConfig from '../app_config';
 import { configValidationSchema } from './config/config.validation';
 
@@ -23,6 +24,7 @@ import { configValidationSchema } from './config/config.validation';
         }),
         HellorpcModule,
         ExrouteModule,
+        HealthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
