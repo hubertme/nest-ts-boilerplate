@@ -20,7 +20,15 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:gen": "npm run build && ts-node node_modules/.bin/typeorm migration:generate src/migrations/migration -d src/db_manager.ts -o",
     "migration:run": "ts-node node_modules/.bin/typeorm migration:run -d src/db_manager.ts",
-    "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert -d src/db_manager.ts"
+    "migration:revert": "ts-node node_modules/.bin/typeorm migration:revert -d src/db_manager.ts",
+    "proto:gen": "./scripts/proto-gen.sh",
+    "generate:module": "nest g mo",
+    "generate:full-module": "bash -c 'nest g mo \"$1\" && nest g co \"$1\" && nest g s \"$1\"' --",
+    "docker:build": "docker build -t nest-ts-boilerplate .",
+    "docker:run": "docker run -p 9000:9000 -p 9002:9002 nest-ts-boilerplate",
+    "prepare:env": "cp envs/.dev.env envs/.env",
+    "prepare:dev": "npm install && npm run prepare:env",
+    "prepare:prod": "npm ci && npm run build"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.17.0",

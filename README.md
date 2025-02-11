@@ -46,11 +46,8 @@ A production-ready NestJS boilerplate with TypeScript, featuring both REST and g
 # Clone the repository
 git clone https://github.com/hubertme/nest-ts-boilerplate.git
 
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp envs/.dev.env envs/.env
+# Install dependencies and prepare environment
+npm run prepare:dev
 
 # Start the development server
 npm run start:dev
@@ -59,10 +56,12 @@ npm run start:dev
 ### Docker Setup
 
 ```bash
-# Build the Docker image
-docker build -t nest-ts-boilerplate .
+# Build and run using npm scripts
+npm run docker:build
+npm run docker:run
 
-# Run the container
+# Or manually with Docker commands
+docker build -t nest-ts-boilerplate .
 docker run -p 9000:9000 -p 9002:9002 nest-ts-boilerplate
 ```
 
@@ -71,10 +70,13 @@ docker run -p 9000:9000 -p 9002:9002 nest-ts-boilerplate
 ### Creating New Modules
 
 ```bash
-# Generate a complete module with controller and service
+# Generate just a module
 npm run generate:module MODULE_NAME
 
-# Or manually:
+# Generate a complete module with controller and service
+npm run generate:full-module MODULE_NAME
+
+# Or manually using NestJS CLI:
 nest g mo MODULE_NAME && nest g co MODULE_NAME && nest g s MODULE_NAME
 ```
 
@@ -83,14 +85,16 @@ nest g mo MODULE_NAME && nest g co MODULE_NAME && nest g s MODULE_NAME
 #### Generate TypeScript Definitions from Proto Files
 
 ```bash
-# Using the provided script
+# Generate TypeScript definitions from proto files
 npm run proto:gen
 
-# Or manually with options:
-protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto \
-  --ts_proto_out=. \
-  --ts_proto_opt=nestJs=true,addGrpcMetadata=true \
-  ./src/**/*.proto
+# The script uses the following protoc options:
+# - nestJs=true: Generate NestJS-compatible code
+# - fileSuffix=.pb: Use .pb suffix for generated files
+# - esModuleInterop=true: Better ES module compatibility
+# - outputEncodeMethods=false: Reduce generated code size
+# - outputJsonMethods=false: Reduce generated code size
+# - outputClientImpl=false: No client implementation
 ```
 
 ### Environment Configuration
