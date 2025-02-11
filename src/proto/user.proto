@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service UserService {
+  // Authentication
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc Logout (LogoutRequest) returns (google.protobuf.Empty) {}
+  
+  // User management
+  rpc CreateUser (CreateUserRequest) returns (User) {}
+  rpc GetUser (GetUserRequest) returns (User) {}
+  rpc UpdateUser (UpdateUserRequest) returns (User) {}
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty) {}
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse) {}
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  google.protobuf.Timestamp expires_at = 3;
+}
+
+message LogoutRequest {
+  string access_token = 1;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+  string full_name = 3;
+  UserRole role = 4;
+  UserStatus status = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_ADMIN = 1;
+  USER_ROLE_USER = 2;
+}
+
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  USER_STATUS_ACTIVE = 1;
+  USER_STATUS_INACTIVE = 2;
+  USER_STATUS_SUSPENDED = 3;
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+  string full_name = 3;
+  UserRole role = 4;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  optional string email = 2;
+  optional string full_name = 3;
+  optional UserRole role = 4;
+  optional UserStatus status = 5;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  repeated UserRole roles = 3;
+  repeated UserStatus statuses = 4;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
