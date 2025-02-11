@@ -19,10 +19,10 @@ import { configValidationSchema } from './config/config.validation';
             validationSchema: configValidationSchema,
         }),
         // Rate limiting
-        ThrottlerModule.forRoot({
+        ThrottlerModule.forRoot([{
             ttl: parseInt(process.env.THROTTLE_TTL) || 60,
             limit: parseInt(process.env.THROTTLE_LIMIT) || 100,
-        }),
+        }]),
         HellorpcModule,
         ExrouteModule,
         HealthModule,

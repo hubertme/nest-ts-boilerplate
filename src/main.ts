@@ -5,7 +5,7 @@ import { Transport } from '@nestjs/microservices';
 import { RPC_HELLORPC_PACKAGE_NAME } from './hellorpc/rpc/rpc_hellorpc';
 import * as path from 'path';
 import helmet from 'helmet';
-import * as rateLimit from 'express-rate-limit';
+import { rateLimit } from 'express-rate-limit';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 

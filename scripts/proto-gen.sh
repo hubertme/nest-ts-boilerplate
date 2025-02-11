@@ -13,5 +13,7 @@ protoc \
   --ts_proto_opt=outputEncodeMethods=false \
   --ts_proto_opt=outputJsonMethods=false \
   --ts_proto_opt=outputClientImpl=false \
+  --ts_proto_opt=useDate=true \
+  --experimental_allow_proto3_optional \
   --proto_path=src/proto \
   src/proto/*.proto

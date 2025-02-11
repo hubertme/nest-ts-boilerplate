@@ -38,7 +38,7 @@ export class UserController {
   @GrpcMethod('UserService', 'Logout')
   async logout(request: LogoutRequest): Promise<Empty> {
     await this.userService.logout(request.accessToken);
-    return {};
+    return new Empty();
   }
 
   @UseGuards(GrpcAuthGuard)
@@ -74,7 +74,7 @@ export class UserController {
   @GrpcMethod('UserService', 'DeleteUser')
   async deleteUser(request: DeleteUserRequest): Promise<Empty> {
     await this.userService.deleteUser(request.id);
-    return {};
+    return new Empty();
   }
 
   @UseGuards(GrpcAuthGuard)

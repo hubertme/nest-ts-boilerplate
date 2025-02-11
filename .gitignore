@@ -38,4 +38,5 @@ lerna-debug.log*
 # envs/
 keys/
 # db_manager.ts
-migrations/
+migrations/envs/.env
+src/proto/generated/
