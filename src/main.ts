@@ -7,9 +7,29 @@ import * as path from 'path';
 import helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function runRest() {
     const app = await NestFactory.create(AppModule);
+
+    // Configure Swagger documentation
+    const config = new DocumentBuilder()
+        .setTitle('NestJS TypeScript Boilerplate')
+        .setDescription('REST API documentation for NestJS TypeScript Boilerplate')
+        .setVersion('1.0')
+        .addBearerAuth()
+        .addTag('health', 'Health check endpoints')
+        .addTag('users', 'User management endpoints')
+        .addServer(process.env.NODE_ENV === 'production' ? 'https://api.example.com' : 'http://localhost:' + process.env.PORT)
+        .build();
+    
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api/docs', app, document, {
+        swaggerOptions: {
+            persistAuthorization: true,
+        },
+        customSiteTitle: 'NestJS API Docs',
+    });
 
     // Security middleware
     app.use(helmet());
