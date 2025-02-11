@@ -22,8 +22,10 @@ import {
   ApiParam,
   ApiQuery,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { User, UserRole, UserStatus } from '../proto/generated/user.pb';
+import { UserDto } from './dto/user.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -34,7 +36,7 @@ export class UserRestController {
   @ApiOperation({ summary: 'Create a new user' })
   @ApiCreatedResponse({
     description: 'The user has been successfully created.',
-    type: User,
+    schema: { $ref: getSchemaPath(UserDto) },
   })
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.createUser(
@@ -51,7 +53,7 @@ export class UserRestController {
   @ApiParam({ name: 'id', description: 'The ID of the user' })
   @ApiOkResponse({
     description: 'The user has been successfully retrieved.',
-    type: User,
+    schema: { $ref: getSchemaPath(UserDto) },
   })
   async getUser(@Param('id') id: string): Promise<User> {
     return this.userService.getUser(id);
@@ -63,7 +65,7 @@ export class UserRestController {
   @ApiParam({ name: 'id', description: 'The ID of the user to update' })
   @ApiOkResponse({
     description: 'The user has been successfully updated.',
-    type: User,
+    schema: { $ref: getSchemaPath(UserDto) },
   })
   async updateUser(
     @Param('id') id: string,
@@ -98,7 +100,17 @@ export class UserRestController {
   @ApiQuery({ name: 'statuses', required: false, isArray: true, enum: UserStatus })
   @ApiOkResponse({
     description: 'List of users retrieved successfully.',
-    type: [User],
+    schema: { 
+      type: 'object',
+      properties: {
+        users: {
+          type: 'array',
+          items: { $ref: getSchemaPath(UserDto) }
+        },
+        nextPageToken: { type: 'string' },
+        totalCount: { type: 'number' }
+      }
+    },
   })
   async listUsers(
     @Query('pageSize') pageSize: number = 10,
