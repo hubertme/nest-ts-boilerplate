@@ -26,9 +26,8 @@
     "generate:full-module": "bash -c 'nest g mo \"$1\" && nest g co \"$1\" && nest g s \"$1\"' --",
     "docker:build": "docker build -t nest-ts-boilerplate .",
     "docker:run": "docker run -p 9000:9000 -p 9002:9002 nest-ts-boilerplate",
-    "prepare:env": "cp envs/.dev.env envs/.env",
-    "prepare:dev": "npm install && npm run prepare:env",
-    "prepare:prod": "npm ci && npm run build"
+    "prepare:dev": "npm install && cp envs/.dev.env envs/.env",
+    "prepare:prod": "npm ci && cp envs/.prod.env envs/.env && npm run build"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.17.0",
